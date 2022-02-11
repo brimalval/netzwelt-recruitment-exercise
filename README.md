@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Netzwelt Recruitment Exercise
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+2/11/21: Tested a solution for generating the hierarchial view of territories on [Replit](https://replit.com/@qbmsvalencia/NetzweltRecruitmentTreeTest#index.ts)
 
 ## Available Scripts
 
