@@ -1,7 +1,10 @@
 import React from "react";
+import ApiHelper from "../shared/APIHelper";
 
-async function handleSubmit() {
-  alert("Log-in");
+async function handleSubmit(e: any) {
+  e.preventDefault();
+  const data = await ApiHelper.validateUser("test", "test");
+  alert(data);
 }
 
 const Login: React.FC = () => {
