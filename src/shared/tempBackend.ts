@@ -1,25 +1,40 @@
 import { TerritoryResponse, UserResponse, ErrorResponse } from "./types";
+import Cookies from "js-cookie";
 
 export default class MockApi {
-    static validateUser(
-        username: string,
-        password: string
-    ): Promise<UserResponse | ErrorResponse> {
+    static validateUser(username: string, password: string): Promise<any> {
         if (username === "foo" && password === "bar") {
+            Cookies.set(
+                "user",
+                JSON.stringify({ username: "foo", roles: ["basic-user"] })
+            );
             return Promise.resolve({
                 username: "foo",
                 displayName: "Foo Bar Foo",
                 roles: ["basic-user"],
+                status: "200",
             });
         }
 
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    message: "Invalid username or password.",
+                    status: "401",
+                });
+            }, 100);
+        });
+    }
+
+    static logout(): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                reject("Invalid username or password.");
+                Cookies.remove("user");
+                resolve();
             }, 1000);
         });
     }
-    
+
     static getTerritories(): Promise<TerritoryResponse> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -165,9 +180,19 @@ export default class MockApi {
                             name: "Pampanga",
                             parent: "3",
                         },
+                        {
+                            id: "999",
+                            name: "Extra Place",
+                            parent: "10101",
+                        },
+                        {
+                            id: "9999",
+                            name: "Deep Nesting",
+                            parent: "999",
+                        },
                     ],
                 });
-            }, 1000);
+            }, 100);
         });
     }
 }
