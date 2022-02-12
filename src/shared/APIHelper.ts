@@ -1,5 +1,4 @@
-import { Territory } from "./types";
-
+import { TerritoryResponse, UserResponse, ErrorResponse } from "./types";
 export default class ApiHelper {
     private static readonly BASE_URL: string =
         "https://netzwelt-devtest.azurewebsites.net/";
@@ -8,7 +7,7 @@ export default class ApiHelper {
         return ApiHelper.BASE_URL;
     }
 
-    static async getTerritories(): Promise<{ data: Territory[] }> {
+    static async getTerritories(): Promise<TerritoryResponse> {
         const response = await fetch(ApiHelper.BASE_URL + "Territories/All");
         const data = await response.json();
         return data;
@@ -17,7 +16,7 @@ export default class ApiHelper {
     static async validateUser(
         username: string,
         password: string
-    ): Promise<any> {
+    ): Promise<UserResponse | ErrorResponse> {
         const response = await fetch(ApiHelper.BASE_URL + "Account/Signin", {
             method: "POST",
             headers: {
