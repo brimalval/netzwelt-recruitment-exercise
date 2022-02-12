@@ -15,10 +15,12 @@ const App: React.FC = () => {
             </div>
           </div>
         </nav>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/account/login" element={<Login />} />
-        </Routes>
+        <div className="max-h-100">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/account/login" element={<Login />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
