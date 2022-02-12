@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import {
     BrowserRouter,
-    Link,
     Navigate,
     Outlet,
     Routes,
@@ -13,8 +12,9 @@ import React from "react";
 import Login from "./pages/Login";
 import UserContext from "./shared/UserContext";
 import Cookies from "js-cookie";
+import { Button, Typography } from "@mui/material";
 
-const ProtectedRoutes = (props: RouteProps) => {
+const ProtectedRoutes = () => {
     const user = JSON.parse(Cookies.get("user") || "{}");
     console.log(user);
     return Object.entries(user).length !== 0 ? (
@@ -24,7 +24,7 @@ const ProtectedRoutes = (props: RouteProps) => {
     );
 };
 
-const ProtectedLogin = (props: RouteProps) => {
+const ProtectedLogin = () => {
     const user = JSON.parse(Cookies.get("user") || "{}");
 
     return Object.entries(user).length !== 0 ? <Navigate to="/" /> : <Outlet />;
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         <div className="app">
             <BrowserRouter>
                 {/* Temporary nav */}
-                <nav className="">
+                {/* <nav className="">
                     <div className="px-8 py-4 bg-purple-400">
                         <div className="flex text-white space-x-6">
                             <Link to="/">Home</Link>
@@ -60,8 +60,27 @@ const App: React.FC = () => {
                         </div>
                         <button onClick={handleLogout}>Log-out</button>
                     </div>
+                </nav> */}
+                <nav>
+                    <div className="px-8 py-4 bg-purple-400">
+                        <div className="flex text-white space-x-6 items-center">
+                            {user ? (
+                                <React.Fragment>
+                                    <Typography>
+                                        Welcome, {user.displayName}
+                                    </Typography>
+                                    <Button
+                                        onClick={handleLogout}
+                                        variant="outlined"
+                                        color="secondary"
+                                    >
+                                        Log-out
+                                    </Button>
+                                </React.Fragment>
+                            ) : null}
+                        </div>
+                    </div>
                 </nav>
-                {user ? <h1>Welcome, {user.username}</h1> : null}
                 <div className="max-h-100">
                     <UserContext.Provider value={{ user, setUser }}>
                         <Routes>

@@ -10,7 +10,7 @@ const Login: React.FC = () => {
     });
 
     const userContext = useContext(UserContext);
-    let { user, setUser } = userContext;
+    let { setUser } = userContext;
 
     async function handleSubmit(e: any) {
         e.preventDefault();

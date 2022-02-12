@@ -1,4 +1,4 @@
-import { TerritoryResponse, UserResponse, ErrorResponse } from "./types";
+import { TerritoryResponse } from "./types";
 import Cookies from "js-cookie";
 
 export default class MockApi {
@@ -6,7 +6,11 @@ export default class MockApi {
         if (username === "foo" && password === "bar") {
             Cookies.set(
                 "user",
-                JSON.stringify({ username: "foo", roles: ["basic-user"] })
+                JSON.stringify({
+                    username: "foo",
+                    displayName: "Foo Bar Foo",
+                    roles: ["basic-user"],
+                })
             );
             return Promise.resolve({
                 username: "foo",
@@ -31,7 +35,7 @@ export default class MockApi {
             setTimeout(() => {
                 Cookies.remove("user");
                 resolve();
-            }, 1000);
+            }, 100);
         });
     }
 
