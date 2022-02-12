@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 // import ApiHelper from "../shared/APIHelper";
 import MockApi from "../shared/tempBackend";
 import UserContext from "../shared/UserContext";
+import { Typography } from "@mui/material";
 
 const Login: React.FC = () => {
     const [credentials, setCredentials] = useState({
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
 
     return (
         <div>
-            <h1 className="p-6">Login</h1>
+            <Typography variant="h3" className="p-4 font-bold">Log-in</Typography>
             <form action="#" onSubmit={handleSubmit}>
                 <div className="content-center">
                     <div className="flex flex-col items-center space-y-5">

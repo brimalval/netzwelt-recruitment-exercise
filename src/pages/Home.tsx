@@ -1,4 +1,4 @@
-import { List } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import TerritoryItem from "../components/TerritoryItem";
 import MockApi from "../shared/tempBackend";
@@ -26,8 +26,13 @@ const Home: React.FC = () => {
     );
 
     return (
-        <div>
-            <h1 className="p-6">Home</h1>
+        <div className="px-6">
+            <Typography variant="h3" className="p-4 font-bold">
+                Territories
+            </Typography>
+            <Typography variant="h6" className="p-4">
+                Here is the list of territories
+           </Typography>
             <div className="flex justify-center max-h-full w-full">
                 <div className="w-3/4">
                     <List className="bg-gray-200">

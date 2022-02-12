@@ -5,7 +5,6 @@ import {
     Outlet,
     Routes,
     Route,
-    RouteProps,
 } from "react-router-dom";
 import Home from "./pages/Home";
 import React from "react";
@@ -16,7 +15,6 @@ import { Button, Typography } from "@mui/material";
 
 const ProtectedRoutes = () => {
     const user = JSON.parse(Cookies.get("user") || "{}");
-    console.log(user);
     return Object.entries(user).length !== 0 ? (
         <Outlet />
     ) : (
@@ -35,15 +33,12 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const cookie = Cookies.get("user");
-        console.log("Tried to set user to ", cookie);
-        console.log(cookie);
         if (cookie) {
             setUser(JSON.parse(cookie));
         }
     }, []);
 
     const handleLogout = () => {
-        console.log("Attempted log-out");
         Cookies.remove("user");
         setUser(null);
     };
